@@ -46,7 +46,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.music.play();
 
-    // this.music = this.sound.add('music', {
+    /// this.music = this.sound.add('music', {
 //   volume: 0.4,
 //   loop: true
 // });
@@ -322,9 +322,11 @@ this.npc = this.physics.add
 
       if (distance < 80) {
 
-        this.music.stop();
+       if (this.music) {
+  this.music.stop();
+}
 
-        this.scene.start('EndScene');
+this.scene.start('EndScene');
       }
     });
 
@@ -498,9 +500,11 @@ if (npcDistance < 100) {
         )
       ) {
 
-        this.music.stop();
+        if (this.music) {
+  this.music.stop();
+}
 
-        this.scene.start('EndScene');
+this.scene.start('EndScene');
       }
     }
 
