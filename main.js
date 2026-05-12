@@ -1,4 +1,7 @@
+// main.js
+
 import BootScene from './scenes/BootScene.js';
+import MenuScene from './scenes/MenuScene.js';
 import GameScene from './scenes/GameScene.js';
 import EndScene from './scenes/EndScene.js';
 
@@ -21,6 +24,7 @@ const config = {
 
   scene: [
     BootScene,
+    MenuScene,
     GameScene,
     EndScene
   ]

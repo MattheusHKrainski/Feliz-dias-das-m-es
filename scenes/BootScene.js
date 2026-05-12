@@ -1,3 +1,5 @@
+// scenes/BootScene.js
+
 export default class BootScene extends Phaser.Scene {
 
   constructor() {
@@ -31,13 +33,9 @@ export default class BootScene extends Phaser.Scene {
     );
 
     // PLAYER
-    this.load.spritesheet(
+    this.load.image(
       'player',
-      'assets/images/player.png',
-      {
-        frameWidth: 64,
-        frameHeight: 64
-      }
+      'assets/images/player.png'
     );
 
     // MÚSICA
@@ -46,12 +44,9 @@ export default class BootScene extends Phaser.Scene {
       'assets/audio/musica.mp3'
     );
   }
-// this.load.audio(
-//   'music',
-//   'assets/audio/musica.mp3'
-// );
+
   create() {
 
-    this.scene.start('GameScene');
+    this.scene.start('MenuScene');
   }
 }

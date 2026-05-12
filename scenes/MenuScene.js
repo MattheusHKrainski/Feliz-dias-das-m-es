@@ -1,19 +1,21 @@
+// scenes/MenuScene.js
+
 export default class MenuScene extends Phaser.Scene {
+
   constructor() {
     super('MenuScene');
   }
 
   create() {
 
-    this.add.rectangle(0, 0, this.scale.width * 2, this.scale.height * 2, 0x000000)
-      .setOrigin(0);
+    this.cameras.main.setBackgroundColor('#000000');
 
     this.add.text(
       this.scale.width / 2,
       180,
-      'Feliz Dia das Mães',
+      'Feliz Dia das Mães ❤️',
       {
-        fontSize: '40px',
+        fontSize: '48px',
         color: '#ffffff',
         fontStyle: 'bold'
       }
@@ -21,34 +23,34 @@ export default class MenuScene extends Phaser.Scene {
 
     this.add.text(
       this.scale.width / 2,
-      260,
-      'Uma pequena aventura feita com carinho ❤️',
+      280,
+      'Uma aventura feita com carinho',
       {
-        fontSize: '20px',
+        fontSize: '24px',
         color: '#cccccc'
       }
     ).setOrigin(0.5);
 
     const button = this.add.text(
       this.scale.width / 2,
-      420,
+      450,
       'INICIAR',
       {
-        fontSize: '32px',
+        fontSize: '36px',
         backgroundColor: '#ff4d6d',
+        color: '#ffffff',
         padding: {
-          x: 20,
-          y: 10
-        },
-        color: '#ffffff'
+          x: 30,
+          y: 15
+        }
       }
     )
     .setOrigin(0.5)
     .setInteractive();
 
     button.on('pointerdown', () => {
+
       this.scene.start('GameScene');
     });
   }
 }
-

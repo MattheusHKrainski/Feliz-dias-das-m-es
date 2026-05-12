@@ -1,3 +1,5 @@
+// scenes/GameScene.js
+
 export default class GameScene extends Phaser.Scene {
 
   constructor() {
@@ -6,21 +8,16 @@ export default class GameScene extends Phaser.Scene {
 
   create() {
 
-    // =========================
     // BACKGROUND
-    // =========================
 
     this.background = this.add.image(
       0,
       0,
       'background'
     )
-    .setOrigin(0, 0)
-    .setScale(1);
+    .setOrigin(0, 0);
 
-    // =========================
-    // TAMANHO DO MUNDO
-    // =========================
+    // MUNDO
 
     const worldWidth =
       this.background.displayWidth;
@@ -35,100 +32,108 @@ export default class GameScene extends Phaser.Scene {
       worldHeight
     );
 
-    // =========================
     // MÚSICA
-    // =========================
 
-    this.music = this.sound.add('music', {
-      volume: 0.4,
-      loop: true
-    });
+    this.music = this.sound.add(
+      'music',
+      {
+        volume: 0.4,
+        loop: true
+      }
+    );
 
     this.music.play();
 
-    /// this.music = this.sound.add('music', {
-//   volume: 0.4,
-//   loop: true
-// });
-
-// this.music.play();
-
-    // =========================
     // PLAYER
-    // =========================
 
     this.player = this.physics.add
-      .sprite(400, 300, 'player')
+      .image(
+        400,
+        300,
+        'player'
+      )
       .setScale(0.2);
 
     this.player.setCollideWorldBounds(true);
 
-    // =========================
     // BAÚ
-    // =========================
 
     this.chest = this.physics.add
-      .staticImage(1400, 900, 'chest')
+      .staticImage(
+        1400,
+        900,
+        'chest'
+      )
       .setScale(0.15);
 
-      // PARTÍCULAS DO BAÚ
+    // PARTÍCULAS
 
-tthis.add.particles(
-  0,
-  0,
-  'heart',
-  {
-    x: this.chest.x,
-    y: this.chest.y,
+    this.add.particles(
+      0,
+      0,
+      'heart',
+      {
+        x: this.chest.x,
+        y: this.chest.y,
 
-    speed: 20,
+        speed: 20,
 
-    scale: {
-      start: 0.1,
-      end: 0
-    },
+        scale: {
+          start: 0.1,
+          end: 0
+        },
 
-    lifespan: 2000,
+        lifespan: 2000,
 
-    frequency: 500
-  }
-);
+        frequency: 500
+      }
+    );
 
-      // NPC
+    // NPC
 
-this.npc = this.physics.add
-  .staticImage(900, 500, 'npc')
-  .setScale(2);
+    this.npc = this.physics.add
+      .staticImage(
+        900,
+        500,
+        'npc'
+      )
+      .setScale(2);
 
-    // =========================
-    // COLISÕES
-    // =========================
+    // PAREDES
 
-    this.walls = this.physics.add.staticGroup();
+    this.walls =
+      this.physics.add.staticGroup();
 
-    // ÁGUA
-    this.walls.create(900, 1200, 'chest')
-      .setDisplaySize(1800, 300)
-      .refreshBody();
+    this.walls.create(
+      900,
+      1200,
+      'chest'
+    )
+    .setDisplaySize(1800, 300)
+    .refreshBody();
 
-    // MONTANHA ESQUERDA
-    this.walls.create(100, 300, 'chest')
-      .setDisplaySize(200, 700)
-      .refreshBody();
+    this.walls.create(
+      100,
+      300,
+      'chest'
+    )
+    .setDisplaySize(200, 700)
+    .refreshBody();
 
-    // MONTANHA DIREITA
-    this.walls.create(1800, 300, 'chest')
-      .setDisplaySize(200, 700)
-      .refreshBody();
+    this.walls.create(
+      1800,
+      300,
+      'chest'
+    )
+    .setDisplaySize(200, 700)
+    .refreshBody();
 
     this.physics.add.collider(
       this.player,
       this.walls
     );
 
-    // =========================
     // CÂMERA
-    // =========================
 
     this.cameras.main.setBounds(
       0,
@@ -146,9 +151,7 @@ this.npc = this.physics.add
 
     this.cameras.main.setZoom(1.5);
 
-    // =========================
     // CONTROLES
-    // =========================
 
     this.cursors =
       this.input.keyboard.createCursorKeys();
@@ -158,9 +161,7 @@ this.npc = this.physics.add
         Phaser.Input.Keyboard.KeyCodes.E
       );
 
-    // =========================
     // TEXTO
-    // =========================
 
     this.message = this.add.text(
       20,
@@ -178,218 +179,6 @@ this.npc = this.physics.add
     );
 
     this.message.setScrollFactor(0);
-
-    // =========================
-    // CONTROLES MOBILE
-    // =========================
-
-    this.leftButton = this.add.text(
-      70,
-      this.scale.height - 100,
-      '⬅',
-      {
-        fontSize: '50px',
-        backgroundColor: '#00000088',
-        padding: {
-          x: 20,
-          y: 10
-        }
-      }
-    )
-    .setScrollFactor(0)
-    .setInteractive();
-
-    this.rightButton = this.add.text(
-      170,
-      this.scale.height - 100,
-      '➡',
-      {
-        fontSize: '50px',
-        backgroundColor: '#00000088',
-        padding: {
-          x: 20,
-          y: 10
-        }
-      }
-    )
-    .setScrollFactor(0)
-    .setInteractive();
-
-    this.upButton = this.add.text(
-      120,
-      this.scale.height - 170,
-      '⬆',
-      {
-        fontSize: '50px',
-        backgroundColor: '#00000088',
-        padding: {
-          x: 20,
-          y: 10
-        }
-      }
-    )
-    .setScrollFactor(0)
-    .setInteractive();
-
-    this.downButton = this.add.text(
-      120,
-      this.scale.height - 30,
-      '⬇',
-      {
-        fontSize: '50px',
-        backgroundColor: '#00000088',
-        padding: {
-          x: 20,
-          y: 10
-        }
-      }
-    )
-    .setScrollFactor(0)
-    .setInteractive();
-
-    this.interactButton = this.add.text(
-      this.scale.width - 100,
-      this.scale.height - 100,
-      'E',
-      {
-        fontSize: '50px',
-        backgroundColor: '#ff4d6d',
-        padding: {
-          x: 20,
-          y: 10
-        }
-      }
-    )
-    .setScrollFactor(0)
-    .setInteractive();
-
-    // =========================
-    // FLAGS MOBILE
-    // =========================
-
-    this.mobileControls = {
-      left: false,
-      right: false,
-      up: false,
-      down: false
-    };
-
-    // =========================
-    // EVENTOS MOBILE
-    // =========================
-
-    this.leftButton.on('pointerdown', () => {
-      this.mobileControls.left = true;
-    });
-
-    this.leftButton.on('pointerup', () => {
-      this.mobileControls.left = false;
-    });
-
-    this.rightButton.on('pointerdown', () => {
-      this.mobileControls.right = true;
-    });
-
-    this.rightButton.on('pointerup', () => {
-      this.mobileControls.right = false;
-    });
-
-    this.upButton.on('pointerdown', () => {
-      this.mobileControls.up = true;
-    });
-
-    this.upButton.on('pointerup', () => {
-      this.mobileControls.up = false;
-    });
-
-    this.downButton.on('pointerdown', () => {
-      this.mobileControls.down = true;
-    });
-
-    this.downButton.on('pointerup', () => {
-      this.mobileControls.down = false;
-    });
-
-    this.interactButton.on('pointerdown', () => {
-
-      const distance =
-        Phaser.Math.Distance.Between(
-          this.player.x,
-          this.player.y,
-          this.chest.x,
-          this.chest.y
-        );
-
-      if (distance < 80) {
-
-       if (this.music) {
-  this.music.stop();
-}
-
-this.scene.start('EndScene');
-      }
-    });
-
-    // =========================
-    // ANIMAÇÕES
-    // =========================
-
-    this.createAnimations();
-  }
-
-  createAnimations() {
-
-    this.anims.create({
-      key: 'walk-down',
-      frames: this.anims.generateFrameNumbers(
-        'player',
-        {
-          start: 0,
-          end: 3
-        }
-      ),
-      frameRate: 8,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: 'walk-left',
-      frames: this.anims.generateFrameNumbers(
-        'player',
-        {
-          start: 4,
-          end: 7
-        }
-      ),
-      frameRate: 8,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: 'walk-right',
-      frames: this.anims.generateFrameNumbers(
-        'player',
-        {
-          start: 8,
-          end: 11
-        }
-      ),
-      frameRate: 8,
-      repeat: -1
-    });
-
-    this.anims.create({
-      key: 'walk-up',
-      frames: this.anims.generateFrameNumbers(
-        'player',
-        {
-          start: 12,
-          end: 15
-        }
-      ),
-      frameRate: 8,
-      repeat: -1
-    });
   }
 
   update() {
@@ -399,87 +188,67 @@ this.scene.start('EndScene');
     this.player.setVelocity(0);
 
     // ESQUERDA
-    if (
-      this.cursors.left.isDown ||
-      this.mobileControls.left
-    ) {
 
-      this.player.setVelocityX(-speed);
+    if (this.cursors.left.isDown) {
 
-      this.player.anims.play(
-        'walk-left',
-        true
+      this.player.setVelocityX(
+        -speed
       );
     }
 
     // DIREITA
+
     else if (
-      this.cursors.right.isDown ||
-      this.mobileControls.right
+      this.cursors.right.isDown
     ) {
 
-      this.player.setVelocityX(speed);
-
-      this.player.anims.play(
-        'walk-right',
-        true
+      this.player.setVelocityX(
+        speed
       );
     }
 
     // CIMA
+
     else if (
-      this.cursors.up.isDown ||
-      this.mobileControls.up
+      this.cursors.up.isDown
     ) {
 
-      this.player.setVelocityY(-speed);
-
-      this.player.anims.play(
-        'walk-up',
-        true
+      this.player.setVelocityY(
+        -speed
       );
     }
 
     // BAIXO
+
     else if (
-      this.cursors.down.isDown ||
-      this.mobileControls.down
+      this.cursors.down.isDown
     ) {
 
-      this.player.setVelocityY(speed);
-
-      this.player.anims.play(
-        'walk-down',
-        true
+      this.player.setVelocityY(
+        speed
       );
     }
 
-    // PARADO
-    else {
+    // DISTÂNCIA NPC
 
-      this.player.anims.stop();
+    const npcDistance =
+      Phaser.Math.Distance.Between(
+        this.player.x,
+        this.player.y,
+        this.npc.x,
+        this.npc.y
+      );
+
+    if (npcDistance < 100) {
+
+      this.message.setText(
+        'Criança: O baú especial está escondido ❤️'
+      );
     }
 
-    // DISTÂNCIA DO BAÚ
-    // DISTÂNCIA DO NPC
+    // DISTÂNCIA BAÚ
 
-const npcDistance =
-  Phaser.Math.Distance.Between(
-    this.player.x,
-    this.player.y,
-    this.npc.x,
-    this.npc.y
-  );
-
-// PERTO DO NPC
-
-if (npcDistance < 100) {
-
-  this.message.setText(
-    'Criança: O baú especial está escondido na floresta ❤️'
-  );
-}
-    const distance =
+    const chestDistance =
       Phaser.Math.Distance.Between(
         this.player.x,
         this.player.y,
@@ -487,11 +256,10 @@ if (npcDistance < 100) {
         this.chest.y
       );
 
-    // PERTO DO BAÚ
-    if (distance < 80) {
+    if (chestDistance < 80) {
 
       this.message.setText(
-        'Pressione E para abrir o baú ❤️'
+        'Pressione E para abrir ❤️'
       );
 
       if (
@@ -501,15 +269,16 @@ if (npcDistance < 100) {
       ) {
 
         if (this.music) {
-  this.music.stop();
-}
+          this.music.stop();
+        }
 
-this.scene.start('EndScene');
+        this.scene.start(
+          'EndScene'
+        );
       }
     }
 
-    // LONGE DO BAÚ
-    else {
+    else if (npcDistance >= 100) {
 
       this.message.setText(
         'Encontre o baú especial ❤️'
