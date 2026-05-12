@@ -46,6 +46,13 @@ export default class GameScene extends Phaser.Scene {
 
     this.music.play();
 
+    // this.music = this.sound.add('music', {
+//   volume: 0.4,
+//   loop: true
+// });
+
+// this.music.play();
+
     // =========================
     // PLAYER
     // =========================
