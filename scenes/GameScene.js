@@ -73,17 +73,23 @@ export default class GameScene extends Phaser.Scene {
 
       // PARTÍCULAS DO BAÚ
 
-this.add.particles(
-  this.chest.x,
-  this.chest.y,
+tthis.add.particles(
+  0,
+  0,
   'heart',
   {
+    x: this.chest.x,
+    y: this.chest.y,
+
     speed: 20,
+
     scale: {
       start: 0.1,
       end: 0
     },
+
     lifespan: 2000,
+
     frequency: 500
   }
 );
