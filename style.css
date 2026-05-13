@@ -3,16 +3,21 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+ 
 body {
+  background: #000;
+  overflow: hidden;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
-  background: #000;
-  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
 }
-
+ 
 canvas {
   display: block;
-  margin: auto;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
+ 
